@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Presence</title>
+</head>
+<body>
+    <div class="records-body">
+        <div class="nav-bar">
+            <div class="nav-image">
+                <a href="{{ url_for('index') }}">
+                    <img src="{{ url_for('serve_resource', filename='logo.png') }}" style="height: 33px; width: auto;" alt="Presence">
+                </a>
+            </div>
+            <div class="nav-content">
+                <div class="nav-option1">
+                    <a href="{{ url_for('conduct') }}">Conduct</a>
+                </div>
+                <div class="nav-option2">
+                    <a href="{{ url_for('records') }}">Records</a>
+                </div>
+                <div class="nav-option3">
+                    <a href="{{ url_for('database') }}">Database</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="select-class">
+        <div class="select-class-dropdown">
+            <label for="class">Select Class :</label>
+            <select name="class" id="class" onchange="onDropChange()" required>
+                <option value="" disabled selected>Select</option>
+                {% for class in classes %}
+                    <option value="{{ class }}">{{ class }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+
+    <div class="csv-table">
+        <table id="biodataTable">
+
+        </table>
+    </div>
+</body>
+</html>

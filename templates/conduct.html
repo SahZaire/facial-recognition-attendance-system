@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Presence</title>
+</head>
+<body>
+    <div class="conduct-body">
+        <div class="nav-bar">
+            <div class="nav-image">
+                <a href="{{ url_for('index') }}">
+                    <img src="{{ url_for('serve_resource', filename='logo.png') }}" style="height: 33px; width: auto;" alt="Presence">
+                </a>
+            </div>
+            <div class="nav-content">
+                <div class="nav-option1">
+                    <a href="{{ url_for('conduct') }}">Conduct</a>
+                </div>
+                <div class="nav-option2">
+                    <a href="{{ url_for('records') }}">Records</a>
+                </div>
+                <div class="nav-option3">
+                    <a href="{{ url_for('database') }}">Database</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="select-class">
+            <div class="select-class-dropdown">
+                <label for="class">Select Class :</label>
+                <select name="class" id="class" onchange="onClassChange()" required>
+                    <option value="" disabled selected>Select</option>
+                    {% for class in classes %}
+                        <option value="{{ class }}">{{ class }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+
+        <div class="subject-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Subject</th>
+                        <th>Classes</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for subject in ['DAA', 'SEPM', 'DL', 'NLP', 'CN', 'APT', 'EEIM', 'MP', 'DAA_PR', 'DL_PR', 'NLP_PR'] %}
+                    <tr>
+                        <td>{{ subject }}</td>
+                        <td class="sub{{subject}}">0</td>
+                        <td><a href="javascript:void(0);" onclick="proceedToProcessing('{{ subject }}', `{{url_for('processing')}}`)" data-url="{{ url_for('processing') }}" data-subject="{{ subject }}">Proceed</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="error-message" style="color: red;"></div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+</html>

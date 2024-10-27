@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ATTENDENCE</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 800px;
+    margin: auto;
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+.selection-box {
+    margin-bottom: 20px;
+}
+
+label {
+    margin-right: 10px;
+}
+
+select {
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #0f0e0e;
+}
+
+th {
+    background-color: #ccf399;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>ATTENDENCE</h1>
+        <div class="selection-box">
+            <label for="class-select">Select Class:</label>
+            <select id="class-select" onchange="updateTable()">
+                <option value="">SELECT</option>
+                <option value="class1">TY AIML A</option>
+                <option value="class2">TY AIML B</option>
+                
+            </select>
+        </div>
+
+        <table id="attendance-table">
+            <thead>
+                <tr>
+                    <th>Subject</th>
+                    <th>Class</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Rows will be inserted here based on the selection -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        const attendanceData = {
+    class1: [
+        { subject: 'Math', subName: 'Algebra', classesDone: 10 },
+        { subject: 'Science', subName: 'Biology', classesDone: 8 }
+    ],
+    class2: [
+        { subject: 'History', subName: 'World History', classesDone: 12 },
+        { subject: 'Geography', subName: 'Physical Geography', classesDone: 9 }
+    ],
+    class3: [
+        { subject: 'English', subName: 'Literature', classesDone: 11 },
+        { subject: 'Art', subName: 'Painting', classesDone: 7 }
+    ]
+};
+
+function updateTable() {
+    const select = document.getElementById('class-select');
+    const selectedClass = select.value;
+    const tableBody = document.getElementById('attendance-table').getElementsByTagName('tbody')[0];
+    
+    // Clear previous rows
+    tableBody.innerHTML = '';
+
+    if (attendanceData[selectedClass]) {
+        attendanceData[selectedClass].forEach(row => {
+            const newRow = tableBody.insertRow();
+            newRow.insertCell(0).textContent = row.subject;
+            newRow.insertCell(1).textContent = row.subName;
+            newRow.insertCell(2).textContent = row.classesDone;
+
+            const goCell = newRow.insertCell(3);
+            const proceedButton = document.createElement('button');
+            proceedButton.textContent = 'Proceed';
+            proceedButton.onclick = () => {
+                alert(`Proceeding with ${row.subject} - ${row.subName}`);
+            };
+            goCell.appendChild(proceedButton);
+        });
+    }
+}
+
+    </script>
+<!-- Code injected by live-server -->
+<script>
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
+</script>
+</body>
+</html>

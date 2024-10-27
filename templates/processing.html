@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Presence</title>
+</head>
+<body>
+    <div class="processing-body">
+        <div class="nav-bar">
+            <div class="nav-image">
+                <a href="{{ url_for('index') }}">
+                    <img src="{{ url_for('serve_resource', filename='logo.png') }}" style="height: 33px; width: auto;" alt="Presence">
+                </a>
+            </div>
+            <div class="nav-content">
+                <div class="nav-option1">
+                    <a href="{{ url_for('conduct') }}">Conduct</a>
+                </div>
+                <div class="nav-option2">
+                    <a href="{{ url_for('records') }}">Records</a>
+                </div>
+                <div class="nav-option3">
+                    <a href="{{ url_for('database') }}">Database</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="subject-name">
+            <h1>Subject :</h1>
+            <h1 class="specified">{{ subject }}</h1>
+        </div>
+
+        <div class="cam-session">
+            <div class="camera-block">
+                <video id="camera-stream" autoplay style="width: 100%; height: auto;"></video>
+                <canvas id="overlayCanvas" style="position: absolute; top: 18.1vh; left: 5vh; width: 60vh; height: 40vh; z-index: 100; transform: scaleX(-1); pointer-events: none;"></canvas>
+            </div>
+
+            <div class="session-btn">
+                <div class="start-session">
+                    <button id="startSessionBtn">Start Session</button>
+                </div>
+                <div class="end-session">
+                    <button id="endSessionBtn">End Session</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="model-proceed">
+            <button id="modelProceedBtn">Proceed</button>
+        </div>
+        
+        <div class="model-processingbar" style="display:none;">0%</div>
+        <div class="overview" style="display:none;">
+            <button id="overviewBtn">Overview</button>
+        </div>
+        <div class="overview-table" style="display:none;">
+            <table>
+                <tr>
+                    <td>Total</td>
+                    <td>--</td>
+                </tr>
+                <tr>
+                    <td>Present</td>
+                    <td>--</td>
+                </tr>
+                <tr>
+                    <td>Absent</td>
+                    <td>--</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        // Store the selected subject in a variable
+        const SUB = "{{ subject }}";
+        console.log('Selected Subject:', SUB); // Debugging line
+
+        // document.getElementById('start-attendance-btn').addEventListener('click', function() {
+        //     const data = {
+        //         SUB: '{{ subject }}',  // Assuming you're passing this from Flask to the template
+        //         TEST: '{{ selected_class }}/present',  // Construct the path as needed
+        //         BIODATA: '{{ selected_class }}/listed_100_biodata.csv'  // Construct the path as needed
+        //     };
+
+        //     // Show a progress message
+        //     document.getElementById('progress-message').innerText = "Starting attendance...";
+
+        //     fetch('/start-attendance', {
+        //         method: 'POST',
+        //         headers: {
+        //             'Content-Type': 'application/json'
+        //         },
+        //         body: JSON.stringify(data)
+        //     })
+        //     .then(response => response.json())
+        //     .then(result => {
+        //         if (result.success) {
+        //             console.log('Attendance started successfully:', result.output);
+        //             // You can update the UI further or show a success message
+        //         } else {
+        //             console.error('Error starting attendance:', result.error);
+        //             // Handle error (e.g., show an error message)
+        //         }
+        //     })
+        //     .catch(error => {
+        //         console.error('Error:', error);
+        //     });
+        // });
+    </script>
+</body>
+</html>

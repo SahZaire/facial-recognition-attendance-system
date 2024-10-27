@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Presence</title>
+</head>
+<body>
+    <div class="home-body">
+        <div class="nav-bar">
+            <div class="nav-image">
+                <a href="{{ url_for('index') }}">
+                    <img src="{{ url_for('serve_resource', filename='logo.png') }}" style="height: 33px; width: auto;" alt="Presence">
+                </a>
+            </div>
+            <div class="nav-content">
+                <div class="nav-option1">
+                    <a href="{{ url_for('conduct') }}">Conduct</a>
+                </div>
+                <div class="nav-option2">
+                    <a href="{{ url_for('records') }}">Records</a>
+                </div>
+                <div class="nav-option3">
+                    <a href="{{ url_for('database') }}">Database</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="home-info">
+            <div class="home-info-1">
+                <p>At Presence, we revolutionize attendance with our custom-built facial recognition system, delivering fast and accurate results for schools, workplaces, and events.</p>
+            </div>
+            <div class="home-info-2">
+                <p>With a simple interface and real-time processing, Presence streamlines attendance, letting you focus on your audience. Embrace a smarter, effortless way to manage attendance. Every presence counts!</p>
+            </div>
+        </div>
+
+        <div class="aboutus">
+            <div class="aboutus-head">
+                <div class="builtby">
+                    <h1>BUILT BY</h1>
+                </div>
+                <div class="pos">
+                    <h1 style="color: #e07a5f;">P</h1>
+                    <h1>arts</h1>
+                    <h1 style="color: #064789;">O</h1>
+                    <h1>f</h1>
+                    <h1 style="color: #7ca982;">S</h1>
+                    <h1>peech</h1>
+                </div>
+            </div>
+            <div class="aboutus-members">
+                <div class="member1">
+                    <div class="photo1">
+                        <img src="{{ url_for('serve_resource', filename='pradnya.jpeg') }}" style="height: 250px; width: 250px; border-radius: 50%;" alt="pradnya.jpeg">
+                    </div>
+                    <div class="name1">
+                        <p>Pradnya Patil</p>
+                    </div>
+                    <div class="mail1">
+                        <p>pradnyaaa24@gmail.com</p>
+                    </div>
+                    <div class="linkedin1">
+                        <a href="https://www.linkedin.com/in/pradnya-patil-15700b27a">LinkedIn</a>
+                    </div>
+                    <div class="github1">
+                        <a href="https://github.com/Pradnya-arch">Github</a>
+                    </div>
+                </div>
+                <div class="member2">
+                    <div class="photo2">
+                        <img src="{{ url_for('serve_resource', filename='owaiz.jpg') }}" style="height: 250px; width: 250px; border-radius: 50%;" alt="owaiz.jpg">
+                    </div>
+                    <div class="name2">
+                        <p>Owaiz Jamadar</p>
+                    </div>
+                    <div class="mail2">
+                        <p>Owaisjamadar1701@gmail.com
+                        </p>
+                    </div>
+                    <div class="linkedin2">
+                        <a href="https://www.linkedin.com/in/owais-jamadar-1067811b0/?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app">LinkedIn</a>
+                    </div>
+                    <div class="github2">
+                        <a href="https://github.com/Owaiz11999">Github</a>
+                    </div>
+                </div>
+                <div class="member3">
+                    <div class="photo3">
+                        <img src="{{ url_for('serve_resource', filename='member3.jpeg') }}" style="height: 250px; width: 250px; border-radius: 50%;" alt="member3.jpeg">
+                    </div>
+                    <div class="name3">
+                        <p>Sahil Nichat</p>
+                    </div>
+                    <div class="mail3">
+                        <p>sahilnichat2004@gmail.com</p>
+                    </div>
+                    <div class="linkedin3">
+                        <a href="https://www.linkedin.com/in/sahil-nichat-a7b82b258/">LinkedIn</a>
+                    </div>
+                    <div class="github3">
+                        <a href="https://github.com/SahZaire">Github</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Presence</title>
+</head>
+<body>
+    <div class="database-body">
+        <div class="nav-bar">
+            <div class="nav-image">
+                <a href="{{ url_for('index') }}">
+                    <img src="{{ url_for('serve_resource', filename='logo.png') }}" style="height: 33px; width: auto;" alt="Presence">
+                </a>
+            </div>
+            <div class="nav-content">
+                <div class="nav-option1">
+                    <a href="{{ url_for('conduct') }}">Conduct</a>
+                </div>
+                <div class="nav-option2">
+                    <a href="{{ url_for('records') }}">Records</a>
+                </div>
+                <div class="nav-option3">
+                    <a href="{{ url_for('database') }}">Database</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="select-class">
+            <div class="select-class-dropdown">
+                <label for="class">Select Class :</label>
+                <select name="class" id="class" onchange="onClassChangeDatabase()" required>
+                    <option value="" disabled selected>Select</option>
+                    {% for class in classes %}
+                        <option value="{{ class }}">{{ class }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+
+        <div class="search-bar">
+            <input type="text" id="search-input" placeholder="Search student..." style="font-size: 1.5em;">
+            <button id="search-button" style="font-size: 1.5em;">Go</button>
+        </div>
+        
+        <div class="student-database">
+            <div class="search-student">
+            
+            </div>
+            <div class="student-database-part1">
+                <div class="student-img">
+
+                </div>
+            </div>
+            <div class="student-database-part2">
+                <div class="student-info">
+                    <div class="student-name">
+                        <div class="name-head">
+                            <h1>Name :</h1>
+                        </div>
+                        <div class="name-para">
+                            <h1>Name_Of_Student</h1>
+                        </div>
+                    </div>
+                    <div class="student-roll">
+                        <div class="roll-head">
+                            <h1>Roll Number : </h1>
+                        </div>
+                        <div class="roll-para">
+                            <h1>Roll_Number</h1>
+                        </div>
+                    </div>
+                    <div class="student-reg">
+                        <div class="reg-head">
+                            <h1>Reg. Number : </h1>
+                        </div>
+                        <div class="reg-para">
+                            <h1>Registration_Number</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="database-btns">
+            <div class="database-edit">
+                <div class="database-img-edit">
+                    <button class="img-edit">Edit</button>
+                </div>
+                <div class="database-create">
+                    <button class="create-btn">Create</button>
+                </div>
+            </div>
+
+            <hr class="section-divider"> 
+
+            <div class="database-navigate">
+                <div class="database-prev">
+                    <button class="prev-btn">Previous</button>
+                </div>
+                <div class="database-next">
+                    <button class="next-btn">Next</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="update-database-btn">
+            <button class="update-btn">Update</button>
+        </div>
+
+        <div class="deploy-model">
+            <button class="deploy-btn" id="modelDeployBtn">Deploy Model</button>
+        </div>
+    </div>
+
+    <script>
+    document.getElementById("modelDeployBtn").addEventListener("click", function () {
+        console.log("workinggggggg");
+        const selectedClass = document.querySelector("#class").value;
+        fetch("/start-deployment", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                CLASS_NAME: selectedClass,
+            }),
+        })
+            .then((response) => response.json())
+            .then((result) => {
+                if (result.success) {
+                    console.log(
+                        "Model Deployed successfully",
+                        result.output
+                    );
+                    startProgressBar();
+                } else {
+                    console.error(
+                        "Error Deploying Model:",
+                        result.error
+                    );
+                }
+            })
+            .catch((error) => {
+                console.error("Error:", error);
+            });
+    })
+    </script>
+</body>
+</html>
